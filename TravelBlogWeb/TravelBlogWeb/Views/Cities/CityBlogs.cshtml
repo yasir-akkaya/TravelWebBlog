@@ -1,0 +1,59 @@
+﻿@model List<TravelBlogWeb.Models.BlogPost>
+
+@{
+    ViewBag.Title = "CityBlogs";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+@*<ul>
+        @foreach (var blog in Model)
+        {
+            <li>
+                @blog.Title
+            </li>
+        }
+    </ul>*@
+
+
+
+<main id="main">
+    <h3 class="category-title">Search Results</h3>
+    <!-- ======= Search Results ======= -->
+    <section id="search-result" class="search-result">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-9">
+                    @foreach (var blog in Model)
+                    {
+                        <div class="d-md-flex post-entry-2 small-img">
+                            <a href="single-post.html" class="me-4 thumbnail">
+                                <img src="assets/img/post-landscape-6.jpg" alt="" class="img-fluid">
+                            </a>
+                            <div>
+                                <div class="post-meta"><span class="date">BURAYA ŞEHİR ADI GELECEK</span> <span class="mx-1">&bullet;</span> <span>@blog.CreationDate</span></div>
+                                @*<h3><a href="/SingleBlog/@blog.Id">@blog.Title</a></h3>*@
+                                @*<h3><a>@Html.ActionLink(@blog.Title, "SingleBlog", "SingleBlog", new { BlogPostId = blog.Id }, null)</a></h3>*@
+                                @*<h3><a href="/SingleBlog/@blog.Id">@blog.Title</a></h3>*@
+                                <a href="@Url.Action("ShowBlog", "SingleBlog", new { id = blog.Id })">@blog.Title</a>
+                                @*ViewData["activeblog"]= @blog;*@
+                                @*@Html.RenderAction(TravelBlogWeb.Controllers.SingleBlogController.ShowBlog(@blog.Id))*@
+
+                                <p>@(blog.Content.Substring(0, 5) + "...")</p>
+                                <div class="d-flex align-items-center author">
+                                    <div class="photo"><img src="assets/img/person-2.jpg" alt="" class="img-fluid"></div>
+                                    <div class="name">
+                                        <h3 class="m-0 p-0">@blog.User.Name</h3>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+                @Html.Partial("_SideBarPartial")
+            </div>
+        </div>
+
+    </section> <!-- End Search Result -->
+</main><!-- End #main -->

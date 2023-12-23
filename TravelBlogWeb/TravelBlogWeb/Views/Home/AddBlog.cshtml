@@ -1,0 +1,42 @@
+﻿@{
+    ViewBag.Title = "AddBlog";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<main id="main">
+    <!-- ======= Hero Slider Section ======= -->
+    <section id="hero-slider" class="hero-slider">
+        <div class="container-md" data-aos="fade-in">
+            <div class="row">
+                <div class="col-7">
+                    <form action="@Url.Action("AddBlog")" method="post">
+                        <div class="mb-3">
+                            <label for="blogTitle" class="form-label"><h3>Blog Title</h3></label>
+                            <input type="text" class="form-control" id="blogTitle" name="blogTitle" aria-describedby="blogHeader">
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="mb-2"><h3>City:</h3></label>
+                            <select class="form-select mb-2" id="citiesList" name="citiesList">
+                                <option selected>Choose City</option>
+                                @foreach (var item in ViewBag.cities)
+                                {
+                                    <option value="@item.Id">@item.CityName</option>
+                                }
+                            </select>
+                        <label class="mb-1"><h3>Your Content:</h3></label>
+                        </div>
+
+                        <textarea style="width:750px;" class="mb-3" id="editor" name="editor"></textarea>
+
+                        <div>
+
+                        <button class="btn btn-outline-success" type="submit">Submit</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</main>

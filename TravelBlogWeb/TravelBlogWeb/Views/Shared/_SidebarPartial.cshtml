@@ -1,0 +1,59 @@
+﻿
+
+
+<div class="col-md-3">
+    <!-- ======= Sidebar ======= -->
+    <div class="aside-block">
+
+        <ul class="nav nav-pills custom-tab-nav mb-4" id="pills-tab" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="pills-popular-tab" data-bs-toggle="pill" data-bs-target="#pills-popular" type="button" role="tab" aria-controls="pills-popular" aria-selected="true">Popular</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="pills-latest-tab" data-bs-toggle="pill" data-bs-target="#pills-latest" type="button" role="tab" aria-controls="pills-latest" aria-selected="false">Latest</button>
+            </li>
+        </ul>
+
+        <div class="tab-content" id="pills-tabContent">
+
+            <!-- Popular -->
+            <div class="tab-pane fade show active" id="pills-popular" role="tabpanel" aria-labelledby="pills-popular-tab">
+                @foreach (var item in ViewBag.populars)
+                {
+
+                    <div class="post-entry-1 border-bottom">
+                        <div class="post-meta"><span class="date">Sport</span> <span class="mx-1">&bullet;</span> <span>@item.CreationDate</span></div>
+                        <h2 class="mb-2"><a href="@Url.Action("ShowBlog", "SingleBlog", new { id = item.Id })">@item.Title</a></h2>
+                        <span class="author mb-3 d-block">@item.User.Name</span>
+                    </div>
+                }
+
+
+            </div>
+
+            <!-- Latest -->
+
+
+            <div class="tab-pane fade show active" id="pills-latest" role="tabpanel" aria-labelledby="pills-latests-tab">
+                
+
+
+            @foreach (var item in ViewBag.latests)
+            {
+
+                <div class="post-entry-1 border-bottom">
+                    <div class="post-meta"><span class="date">Sport</span> <span class="mx-1">&bullet;</span> <span>@item.CreationDate</span></div>
+                    <h2 class="mb-2"><a href="@Url.Action("ShowBlog", "SingleBlog", new { id = item.Id })">@item.Title</a></h2>
+                    <span class="author mb-3 d-block">@item.User.Name</span>
+                </div>
+            }
+            </div>
+
+
+
+
+        </div> <!-- End Latest -->
+
+    </div>
+</div>
+

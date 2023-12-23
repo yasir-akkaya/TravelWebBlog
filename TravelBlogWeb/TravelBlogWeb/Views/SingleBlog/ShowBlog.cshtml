@@ -1,0 +1,92 @@
+﻿
+@model  TravelBlogWeb.Models.BlogPost
+
+@{
+    ViewBag.Title = "ShowBlog";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<main id="main">
+
+    <section class="single-post-content">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-9 post-content" data-aos="fade-up">
+                    <!-- ======= Single Post Content ======= -->
+                    <div class="single-post">
+                        <div class="post-meta"><span class="date">@Model.User.Name</span> <span class="mx-1">&bullet;</span> <span>@Model.CreationDate</span></div>
+                        <h1 class="mb-5">@Model.Title</h1>
+                        @Model.Content
+
+                    </div><!-- End Single Post Content -->
+                    <!-- ======= Comments ======= -->
+
+                    <div class="comments">
+                        <h5 class="comment-title py-4">@ViewData["commentCount"] Comments</h5>
+                        @foreach (var item in (List<TravelBlogWeb.Models.BlogComment>)ViewData["Comments"])
+                        {
+                            <div class="comment d-flex mb-4">
+                                <div class="flex-shrink-0">
+                                    <div class="avatar avatar-sm rounded-circle">
+                                        <img class="avatar-img" src="~/ZenBlog/assets/img/person-5.jpg" alt="" class="img-fluid">
+                                    </div>
+                                </div>
+                                <div class="flex-grow-1 ms-2 ms-sm-3">
+                                    <div class="comment-meta d-flex align-items-baseline">
+                                        <h6 class="me-2">@item.User.Name</h6>
+                                        @if (item.User.IsAdmin)
+                                        {
+                                            <p class="text-danger small"> Admin </p>
+                                        }
+                                        else
+                                        {
+                                            <p class="small"> User </p>
+
+                                        }
+                                    <span class="text-muted">&nbsp;&nbsp; @item.CreationDate</span>
+
+                                    </div>
+                                    <div class="comment-body">
+                                        @item.Comment
+                                    </div>
+                                </div>
+                            </div>
+                        }
+
+                    </div><!-- End Comments -->
+                </div>
+
+                @Html.Partial("_SidebarPartial")
+
+            </div>
+            <!-- ======= Comments Form ======= -->
+            <div class="row justify-content-center mt-5">
+
+                <div class="col-lg-12">
+                    <h5 class="comment-title">Leave a Comment</h5>
+                    <div class="row">
+                        <div class="col-lg-6 mb-3">
+                            <label for="comment-name">Name</label>
+                            <input type="text" class="form-control" id="comment-name" placeholder="Enter your name">
+                        </div>
+                        <div class="col-lg-6 mb-3">
+                            <label for="comment-email">Email</label>
+                            <input type="text" class="form-control" id="comment-email" placeholder="Enter your email">
+                        </div>
+                        <div class="col-12 mb-3">
+                            <label for="comment-message">Message</label>
+
+                            <textarea class="form-control" id="comment-message" placeholder="Enter your name" cols="30" rows="10"></textarea>
+                        </div>
+                        <div class="col-12">
+                            <input type="submit" class="btn btn-primary" value="Post comment">
+                        </div>
+                    </div>
+                </div>
+            </div><!-- End Comments Form -->
+        </div>
+
+
+    </section>
+
+
+</main>>

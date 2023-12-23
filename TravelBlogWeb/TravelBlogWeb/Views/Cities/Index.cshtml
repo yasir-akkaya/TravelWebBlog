@@ -1,0 +1,17 @@
+﻿@model List<TravelBlogWeb.Models.City>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<main style="margin-top:8% ; margin-bottom:8%;">
+    <ul>
+        @foreach (var city in Model)
+        {
+            <li>
+                @Html.ActionLink(city.CityName, "CityBlogs", new { cityId = city.Id })
+
+            </li>
+        }
+    </ul>
+</main>
