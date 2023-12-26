@@ -138,6 +138,7 @@
     <Compile Include="Entity\BlogPostProcess.cs" />
     <Compile Include="Entity\CommentProcess.cs" />
     <Compile Include="Entity\Data\DataContext.cs" />
+    <Compile Include="Entity\Interfaces\BlogLikeProcess.cs" />
     <Compile Include="Entity\Interfaces\ICrud.cs" />
     <Compile Include="Entity\PartialProcess.cs" />
     <Compile Include="Entity\UserProcess.cs" />

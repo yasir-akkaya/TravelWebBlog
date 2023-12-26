@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Data.Entity;
 using System.Web.Mvc;
 using TravelBlogWeb.Controllers;
 using TravelBlogWeb.Entity;
+using TravelBlogWeb.Entity.Data;
 using TravelBlogWeb.Models;
 
 public class CitiesController : Controller
@@ -9,6 +11,7 @@ public class CitiesController : Controller
     BlogCityRelationProcess blogCityRelationProcess = new BlogCityRelationProcess();
     BlogPostProcess blogPostProcess = new BlogPostProcess();
     PartialProcess partialProcess=new PartialProcess();
+    DataContext db=new DataContext();
 
 
 
@@ -34,11 +37,12 @@ public class CitiesController : Controller
         }
 
         var singleCityBlogs = blogPostProcess.GetCityBlogPosts(blogCity);
-
         var populars = partialProcess.GetPopulars();
         var latests = partialProcess.GetLatests();
+
         ViewBag.populars = populars;
         ViewBag.latests = latests;
+
 
         return View(singleCityBlogs);
 

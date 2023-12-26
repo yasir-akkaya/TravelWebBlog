@@ -15,24 +15,70 @@
                 <div class="col-md-9 post-content" data-aos="fade-up">
                     <!-- ======= Single Post Content ======= -->
                     <div class="single-post">
-                        <div class="post-meta"><span class="date">@Model.User.Name</span> <span class="mx-1">&bullet;</span> <span>@Model.CreationDate</span></div>
+                        <div class="post-meta d-inline-block">
+
+
+
+
+                            &nbsp;&nbsp;&nbsp;
+                            <span class="date float-start">@Model.User.Name</span>
+                            <span class="mx-1">&bullet;</span>
+                            <span>@Model.CreationDate</span>
+                            @{ if (User.Identity.IsAuthenticated)
+                                {
+                                    if (ViewBag.isLiked)
+                                    {
+
+                                        <form action="@Url.Action("Dislike")" method="post">
+                                            <input class="d-none" type="number" name="likeblogId" value="@ViewData["currentBlogId"]" />
+
+                                            <button style="border:none;" class="bg-white" type="submit">
+                                                <i class="fa-solid fa-heart fa-2xl" style="color: #ff0000;"></i>
+                                            </button>
+                                        </form>
+
+                                    }
+                                    else
+                                    {
+
+                                        <form action="@Url.Action("Like")" method="post">
+                                            <input class="d-none" type="number" name="likeblogId" value="@ViewData["currentBlogId"]" />
+                                            <button style="border:none;" class="bg-white" type="submit">
+                                                <i class="fa-regular fa-heart fa-2xl" style="color: #ff0000;"></i>
+                                            </button>
+                                        </form>
+
+                                    }
+                                }
+
+
+
+                                <form style="width:20px;" method="post">
+                                    <input class="d-none" type="number" name="likeblogId" />
+                                    <button disabled style="border:none;" class="bg-white" type="submit">
+                                        <i class="fa-regular fa-heart fa-2xl" style="color: #000000;"></i>
+                                    </button>
+                                </form>
+                            }
+                        </div>
                         <h1 class="mb-5">@Model.Title</h1>
 
                         <p style="white-space:pre-line;">
                             @Model.Content
                         </p>
 
+
                     </div><!-- End Single Post Content -->
                     <!-- ======= Comments ======= -->
 
                     <div class="comments">
-                        <h5 class="comment-title py-4">@ViewData["commentCount"] Comments</h5>
+                        <h5 class="comment-title py-4">@ViewData["commentCount"] Comments <span class="mx-1">&bullet;</span>@ViewBag.likeCount Likes</h5>
                         @foreach (var item in (List<TravelBlogWeb.Models.BlogComment>)ViewData["Comments"])
                         {
                             <div class="comment d-flex mb-4">
                                 <div class="flex-shrink-0">
                                     <div class="avatar avatar-sm rounded-circle">
-                                        <img class="avatar-img img-fluid" src="~/ZenBlog/assets/img/person-5.jpg" alt="" >
+                                        <img class="avatar-img img-fluid" src="~/ZenBlog/assets/img/person-5.jpg" alt="">
                                     </div>
                                 </div>
                                 <div class="flex-grow-1 ms-2 ms-sm-3">
@@ -76,19 +122,19 @@
 
 
 
-                                <div class="col-lg-7 mb-3">
-                                    <input class="d-none" type="text" name="blogId" value="@ViewBag.blogId" />
-                                    <label for="comment-name">Name</label>
-                                    <input disabled type="text" class="form-control" id="comment-name" value="@userName">
-                                </div>
+                                    <div class="col-lg-7 mb-3">
+                                        <input class="d-none" type="text" name="blogId" value="@ViewBag.blogId" />
+                                        <label for="comment-name">Name</label>
+                                        <input disabled type="text" class="form-control" id="comment-name" value="@userName">
+                                    </div>
 
-                                <div class="col-7 mb-3">
-                                    <label for="comment-message">Message</label>
-                                    <textarea class="form-control" id="comment-message" name="commentText" placeholder="Your Comment" cols="30" rows="10"></textarea>
-                                </div>
-                                <div class="col-7">
-                                    <input type="submit" class="btn btn-primary" value="Post comment">
-                                </div>
+                                    <div class="col-7 mb-3">
+                                        <label for="comment-message">Message</label>
+                                        <textarea class="form-control" id="comment-message" name="commentText" placeholder="Your Comment" cols="30" rows="10"></textarea>
+                                    </div>
+                                    <div class="col-7">
+                                        <input type="submit" class="btn btn-primary" value="Post comment">
+                                    </div>
                                 </form>
                             </div>
                         </div>
@@ -111,7 +157,7 @@
                                 </div>
                                 <div class="col-7 mb-3">
                                     <label for="comment-message">Message</label>
-                                    <textarea disabled class="form-control border-danger" id="comment-message"   cols="30" rows="10"></textarea>
+                                    <textarea disabled class="form-control border-danger" id="comment-message" cols="30" rows="10"></textarea>
                                 </div>
                                 <div class="col-7">
                                     <input disabled type="submit" class="btn btn-outline-danger" value="Post comment">
