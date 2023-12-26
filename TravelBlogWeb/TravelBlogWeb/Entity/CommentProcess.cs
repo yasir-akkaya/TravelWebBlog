@@ -14,7 +14,29 @@ namespace TravelBlogWeb.Entity
         DataContext db = new DataContext();
         public string Add(BlogComment entity)
         {
-            throw new NotImplementedException();
+            string result = "";
+            try
+            {
+                var comment = db.BlogComments.FirstOrDefault(x => x.Comment == entity.Comment);
+
+                if (comment == null)
+                {
+                    db.BlogComments.Add(entity);
+
+                    db.SaveChanges();
+                    result = entity.Comment + " Comment Added Successfully";
+                }
+                else
+                {
+                    result = entity.Comment + " Comment can't added!";
+                }
+            }
+            catch (Exception ex)
+            {
+                result += ex.Message;
+            }
+
+            return result;
         }
 
         public bool Delete(int id)
@@ -32,7 +54,7 @@ namespace TravelBlogWeb.Entity
         }
         public List<BlogComment> GetBlogComments(int blogPostId)
         {
-            List<BlogComment> comments = db.BlogComments.Where(comment => comment.BlogPostId == blogPostId)
+            List<BlogComment> comments = db.BlogComments.Where(comment => comment.BlogPostId == blogPostId && comment.IsActive==true)
                 .OrderBy(comment => comment.CreationDate)
                 .ToList();
             return comments;

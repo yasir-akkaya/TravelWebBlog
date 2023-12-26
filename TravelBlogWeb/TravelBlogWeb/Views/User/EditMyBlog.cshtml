@@ -1,6 +1,6 @@
-﻿@{
-    ViewBag.Title = "AddBlog";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+﻿@model  TravelBlogWeb.Models.BlogPost
+@{
+    ViewBag.Title = "EditMyBlog";
 }
 
 <main id="main">
@@ -9,14 +9,15 @@
         <div class="container-md" data-aos="fade-in">
             <div class="row">
                 <div class="col-7">
-                    <form action="@Url.Action("AddBlog")" method="post">
+                    <form action="@Url.Action("EditMyBlog")" method="post">
                         <div class="mb-3">
+                            <input name="blogId" class="col-2 d-none" value="@Model.Id">
                             <label for="blogTitle" class="form-label"><h3>Blog Title</h3></label>
-                            <input type="text" class="form-control" id="blogTitle" name="blogTitle" aria-describedby="blogHeader">
+                            <input value="@Model.Title " type="text" class="form-control" id="blogTitle" name="blogTitle" aria-describedby="blogHeader">
                         </div>
 
                         <div class="mb-3">
-                            <label class="mb-2"><h3>City:</h3></label>
+                            <h3> <label class="mb-2">City:</label></h3>
                             <select class="form-select mb-2" id="citiesList" name="citiesList">
                                 <option selected>Choose City</option>
                                 @foreach (var item in ViewBag.cities)
@@ -24,14 +25,15 @@
                                     <option value="@item.Id">@item.CityName</option>
                                 }
                             </select>
-                        <label class="mb-1"><h3>Your Content:</h3></label>
+                            <label class="mb-1"><h3>Your Content:</h3></label>
                         </div>
 
-                        <textarea style="width:750px;" class="mb-3" id="editor" name="editor" cols="30" rows="50"></textarea>
+                        <textarea style="width:750px;" class="mb-3" id="editor" name="editor" cols="30" rows="50">@Model.Content</textarea>
 
                         <div>
 
-                        <button class="btn btn-outline-success" type="submit">Submit</button>
+                            <button class="btn btn-outline-success" type="submit">Update</button>
+                            
                         </div>
                     </form>
                 </div>
@@ -40,3 +42,4 @@
     </section>
 
 </main>
+

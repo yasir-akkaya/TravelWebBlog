@@ -44,7 +44,7 @@ namespace TravelBlogWeb.Entity
 
         public BlogPost Get(int id)
         {
-            var blog = db.BlogPosts.FirstOrDefault(x => x.Id == id );
+            var blog = db.BlogPosts.FirstOrDefault(x => x.Id == id);
             return blog;
         }
 
@@ -55,15 +55,48 @@ namespace TravelBlogWeb.Entity
 
         public bool Update(BlogPost entity, int id)
         {
-            throw new NotImplementedException();
+            var editedBlog = db.BlogPosts.Find(id);
+            if (editedBlog != null)
+            {
+                editedBlog.Title = entity.Title;
+                editedBlog.Content = entity.Content;
+                editedBlog.Image = entity.Image;
+                db.SaveChanges();
+                return true;
+            }
+            return false;
+
         }
 
         public List<BlogPost> GetCityBlogPosts(List<int> blogs)
         {
-           
+
             List<BlogPost> singleCity = db.BlogPosts.Where(blog => blogs.Contains(blog.Id)).ToList();
 
             return singleCity;
+        }
+
+        public List<Models.BlogPost> GetTenPopulars()
+        {
+
+            var populars = db.BlogPosts
+                         .OrderByDescending(blog => blog.BlogLikes.Count())
+                          .Take(7)
+                         .ToList();
+
+            return populars;
+        }
+        public List<Models.BlogPost> GetTenLatests()
+        {
+            var list = db.BlogPosts
+            .OrderByDescending(blog => blog.CreationDate).Take(10).ToList();
+            return list;
+        }
+
+        public List<Models.BlogPost> GetMyBlogs(int userId)
+        {
+            List<BlogPost> userBlogs = db.BlogPosts.Where(x => x.UserId == userId).ToList();
+            return userBlogs;
         }
     }
 }

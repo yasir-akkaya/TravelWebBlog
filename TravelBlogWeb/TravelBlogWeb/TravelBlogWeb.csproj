@@ -127,11 +127,12 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Controllers\AddBlogController.cs" />
     <Compile Include="Controllers\CitiesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\PanelController.cs" />
     <Compile Include="Controllers\PartialController.cs" />
     <Compile Include="Controllers\SingleBlogController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Entity\Abstracts\CommonProperty.cs" />
     <Compile Include="Entity\BlogCityRelationProcess.cs" />
     <Compile Include="Entity\BlogPostProcess.cs" />
@@ -139,6 +140,7 @@
     <Compile Include="Entity\Data\DataContext.cs" />
     <Compile Include="Entity\Interfaces\ICrud.cs" />
     <Compile Include="Entity\PartialProcess.cs" />
+    <Compile Include="Entity\UserProcess.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -329,12 +331,18 @@
     <Content Include="ZenBlog\forms\contact.php" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\SingleBlog\Index.cshtml" />
-    <Content Include="Views\AddBlog\Index.cshtml" />
     <Content Include="Views\Cities\Index.cshtml" />
     <Content Include="Views\Cities\CityBlogs.cshtml" />
     <Content Include="Views\SingleBlog\ShowBlog.cshtml" />
     <Content Include="Views\Shared\_SidebarPartial.cshtml" />
     <Content Include="Views\Home\AddBlog.cshtml" />
+    <Content Include="Views\User\Login.cshtml" />
+    <Content Include="Views\User\SignUp.cshtml" />
+    <Content Include="Views\Panel\Index.cshtml" />
+    <Content Include="Views\Shared\_UserLayout.cshtml" />
+    <Content Include="Views\Shared\_PanelLayout.cshtml" />
+    <Content Include="Views\User\MyBlogs.cshtml" />
+    <Content Include="Views\User\EditMyBlog.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

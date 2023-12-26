@@ -16,6 +16,17 @@ namespace TravelBlogWeb.Controllers
         BlogPostProcess blogPostProcess = new BlogPostProcess();
         public ActionResult Index()
         {
+            ViewBag.popularsMain = blogPostProcess.GetTenPopulars().Take(7).ToList();
+            ViewBag.popularsAside = blogPostProcess.GetTenPopulars().Take(5).ToList();
+            ViewBag.latests = blogPostProcess.GetTenLatests().ToList();
+            ViewBag.counter = 1;
+
+            if (User.Identity.IsAuthenticated)
+            {
+                ViewBag.state = true;
+            }
+
+
             return View();
         }
 
@@ -45,38 +56,34 @@ namespace TravelBlogWeb.Controllers
         public ActionResult AddBlog(BlogPost model)
         {
 
-            try
+
+            string title = Request.Form["blogTitle"];
+            string content = Request.Form["editor"];
+            int selectedCityId = int.Parse(Request.Form["citiesList"]);
+
+
+            BlogPost newBlogPost = new BlogPost
             {
-                string title = Request.Form["blogTitle"];
-                string content = Request.Form["editor"];
-                int selectedCityId = int.Parse(Request.Form["citiesList"]);
+                UserId = Convert.ToInt32(HttpContext.Session["userId"]),
+                Title = title,
+                Content = content,
+                CreationDate = DateTime.Now,
 
+            };
 
-                BlogPost newBlogPost = new BlogPost
-                {
-                    Title = title,
-                    Content = content,
-                    CreationDate = DateTime.Now,
-                    UserId = 2
-                };
+            blogPostProcess.Add(newBlogPost);
 
-                blogPostProcess.Add(newBlogPost);
-
-                CityBlogRelation cityBlogRelation = new CityBlogRelation
-                {
-                    BlogPostId = newBlogPost.Id,
-                    CityId = selectedCityId,
-                };
-
-                blogCityRelationProcess.Add(cityBlogRelation);
-
-                return RedirectToAction("Index");
-            }
-            catch (Exception ex)
+            CityBlogRelation cityBlogRelation = new CityBlogRelation
             {
-                
-                return View("Error");
-            }
+                BlogPostId = newBlogPost.Id,
+                CityId = selectedCityId,
+            };
+
+            blogCityRelationProcess.Add(cityBlogRelation);
+
+            return RedirectToAction("Index");
+
+
 
         }
     }

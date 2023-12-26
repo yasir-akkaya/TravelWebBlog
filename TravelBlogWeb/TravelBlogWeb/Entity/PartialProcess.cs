@@ -42,7 +42,7 @@ namespace TravelBlogWeb.Entity
 
             var populars = db.BlogPosts
                          .OrderByDescending(blog => blog.BlogLikes.Count())
-                          .Take(3) 
+                          .Take(6) 
                          .ToList();
 
             return populars;
@@ -51,7 +51,7 @@ namespace TravelBlogWeb.Entity
         public List<Models.BlogPost> GetLatests()
         {
             var list = db.BlogPosts
-            .OrderByDescending(blog => blog.CreationDate).Take(3).ToList();
+            .OrderByDescending(blog => blog.CreationDate).Take(6).ToList();
             return list;
         }
 

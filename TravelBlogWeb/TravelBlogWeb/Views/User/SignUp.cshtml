@@ -1,0 +1,39 @@
+﻿
+@{
+    ViewBag.Title = "SignUp";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<main class="text-center row align-items-center justify-content-center" style="margin-top:10%;">
+
+    <h2 class="mb-3">Sign Up</h2>
+    <form class="col-6" action="@Url.Action("SignUp")" method="post">
+        <!-- Name -->
+        <div class="form-outline mb-4">
+            <label class="form-label fw-bold" for="form2Example1">Name</label>
+            <input type="text" id="name" name="name" class="form-control" />
+        </div>
+        <!-- Email input -->
+        <div class="form-outline mb-4">
+            <label class="form-label fw-bold" for="form2Example1">Email address</label>
+            <input type="email" id="email" name="email" class="form-control" />
+        </div>
+
+        <!-- Password input -->
+        <div class="form-outline mb-4">
+            <label class="form-label fw-bold" for="form2Example2">Password</label>
+            <input type="password" id="password" name="password" class="form-control" />
+        </div>
+
+        <!-- 2 column grid layout for inline styling -->
+        <!-- Submit button -->
+        <button type="submit" class="btn btn-primary btn-block mb-4">Sign Up</button>
+        <div class="row mb-4">
+            <div class="col d-flex justify-content-center">
+                <p>You already have an account?</p> <p class="fw-bold text-success"> &nbsp;&nbsp; @Html.ActionLink("Sign In", "Login", "User")</p>
+
+            </div>
+        </div>
+    </form>
+</main>
+

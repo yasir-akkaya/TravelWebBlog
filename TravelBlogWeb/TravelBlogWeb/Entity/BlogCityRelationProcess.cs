@@ -51,9 +51,17 @@ namespace TravelBlogWeb.Entity
             return cities;
         }
 
-        public bool Update(City entity, int id)
+        public bool Update(CityBlogRelation entity, int id)
         {
-            throw new NotImplementedException();
+            var editedRelation = db.CityBlogRelations.FirstOrDefault(x=>x.Id==id);
+            if (editedRelation!=null)
+            {
+                editedRelation.BlogPostId = entity.BlogPostId;
+                editedRelation.CityId=entity.CityId;
+                db.SaveChanges();
+                return true;
+            }
+            return false;
         }
 
         City ICrud<City>.Get(int id)
@@ -62,6 +70,11 @@ namespace TravelBlogWeb.Entity
         }
 
         public string Add(City entity)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool Update(City entity, int id)
         {
             throw new NotImplementedException();
         }
