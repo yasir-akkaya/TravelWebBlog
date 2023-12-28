@@ -1,14 +1,218 @@
-﻿
+﻿@model TravelBlogWeb.Models.PanelHomeModel
 @{
     ViewBag.Title = "Index";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/_PanelLayout.cshtml";
 }
 
-<main>
+<div class="content-page">
+    <div class="content">
+
+        <!-- Start Content-->
+        <div class="container-fluid">
+
+            <div class="row">
+
+                <h2>Index - Hoşgeldin @HttpContext.Current.User.Identity.Name</h2>
+                
+                <div style="cursor:pointer;" class="col-2">
+                    <div class="card div-hover">
+                        <div class="card-header">
+                            <h3>Users</h3>
+                        </div>
+                        <div class="card-body text-center">
+                            <i class="fa fa-users text-success" style="font-size:50px"></i> &nbsp;
+                            <b class="text-success" style="font-size:56px">@Model.UserCount</b>
+                        </div>
+                    </div>
+                </div>
+                <div style="cursor:pointer;" class="col-2">
+                    <div class="card div-hover" >
+                        <div class="card-header">
+                            <h3>Blogs</h3>
+                        </div>
+                        <div class="card-body text-center">
+                            <i class="fa-solid fa-file-lines text-primary" style="font-size:50px"></i> &nbsp;
+                            <b class="text-primary" style="font-size:56px">@Model.BlogCount</b>
+                        </div>
+                    </div>
+                </div>
+                <div style="cursor:pointer;" class="col-3">
+                    <div class="card div-hover">
+                        <div class="card-header">
+                            <h3>Approved Comments</h3>
+                        </div>
+                        <div class="card-body text-center">
+                            <i class="fa-solid fa-comment text-warning" style="font-size:50px"></i> &nbsp;
+                            <b class="text-warning" style="font-size:56px">@Model.ApprovedCommentsCount</b>
+                        </div>
+                    </div>
+                </div>
+                <div style="cursor:pointer;" class="col-3">
+                    <div class="card div-hover">
+                        <div class="card-header">
+                            <h3>Pending Comments</h3>
+                        </div>
+                        <div class="card-body text-center">
+                            <i class="fa-solid fa-comment-slash text-warning" style="font-size:50px"></i> &nbsp;
+                            <b class="text-warning" style="font-size:56px">@Model.PendingCommentsCount</b>
+                        </div>
+                    </div>
+                </div>
+                <div style="cursor:pointer;" class="col-2" onclick="@Url.Action("Likes")">
+                    <div class="card div-hover">
+                        <div class="card-header">
+                            <h3>Total Likes</h3>
+                        </div>
+                        <div class="card-body text-center">
+                            <i class="fa-solid fa-heart text-danger" style="font-size:50px"></i> &nbsp;
+                            <b class="text-danger" style="font-size:56px">@Model.LikesCount</b>
+                        </div>
+                    </div>
+                </div>
 
 
+                @*<div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h3>Last Add Products</h3>
+                </div>
+                <div class="card-body">
+                    <table class="table table-hover table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th>No</th>
+                                <th>Name</th>
+                                <th>Stock</th>
+                                <th>Price</th>
+                                <th>Status</th>
+                                <th>Settings</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.LastAddProduct)
+                            {
+                                i++;
+                                <tr>
+                                    <td>@i</td>
+                                    <td>@item.Name</td>
+                                    <td>@item.Stock Adet</td>
+                                    <td>@item.Price.ToString("c")</td>
+                                    <td>
+                                        <span class="badge bg-@(item.IsStatus?"success":"danger")">
+                                            @(item.IsStatus?"Active":"Passive")
+                                        </span>
+                                    </td>
+
+                                    <td>
+                                        <a href="~/Product/Edit/@item.Id" class="btn btn-primary btn-sm">
+                                            <i class="fa fa-cogs"></i> &nbsp;
+                                            Edit
+                                        </a>
+                                    </td>
+                                </tr>
+
+                            }
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h3>Best Seller Products</h3>
+                </div>
+                <div class="card-body">
+                    <table class="table table-hover table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th>No</th>
+                                <th>Name</th>
+                                <th>Stock</th>
+                                <th>Price</th>
+                                <th>Status</th>
+                                <th>Quantity</th>
+                                <th>Settings</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.BestSellProduct)
+                            {
+                                j++;
+                                <tr>
+                                    <td>@j</td>
+                                    <td>@item.Name</td>
+                                    <td>@item.Stock Adet</td>
+                                    <td>@item.Price.ToString("c")</td>
+                                    <td>
+                                        <span class="badge bg-@(item.IsStatus?"success":"danger")">
+                                            @(item.IsStatus?"Active":"Passive")
+                                        </span>
+                                    </td>
+                                    <td>
+                                        @{ int quantity = 0;}
+                                        @for (int k = 0; k < Model.ProductQuantity.GetLength(0); k++)
+                                        {
+                                            if (Model.ProductQuantity[k, 0] == item.Id)
+                                            {
+                                                quantity = Model.ProductQuantity[k, 1];
+                                                break;
+                                            }
+                                        }
+                                        @quantity Adet
+                                    </td>
+                                    <td>
+                                        <a href="~/Product/Edit/@item.Id" class="btn btn-primary btn-sm">
+                                            <i class="fa fa-cogs"></i> &nbsp;
+                                            Edit
+                                        </a>
+                                    </td>
+                                </tr>
+
+                            }
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+        @foreach (var item in Model.Categories)
+        {
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h3>@item.Name</h3>
+                    </div>
+                    <div class="card-body">
+                        @Html.Action("CategoryProduct", "PanelPartial", new { id = item.Id })
+                    </div>
+                </div>
+            </div>
+        }*@
 
 
+                @*<div class="row">
+            <div class="col-3">
+                <div class="list-group">
+                    <a href="#" class="list-group-item list-group-item-action active" aria-current="true">
+                        Panel
+                    </a>
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <a href="~/Role/Index" class="list-group-item list-group-item-action">Role List</a>
+                        <a href="~/User/Index" class="list-group-item list-group-item-action">User List</a>
+                        <a href="~/Category/Index" class="list-group-item list-group-item-action">Category List</a>
+                        <a href="~/Product/Index" class="list-group-item list-group-item-action">Product List</a>
+                        <a href="~/Slider/Index" class="list-group-item list-group-item-action">Slider List</a>
 
-</main>
+                    }
+                    <a href="~/Home/Index" class="list-group-item list-group-item-action">Web Site</a>
+                </div>
+            </div>
+        </div>*@
+            </div>
+        </div>
+    </div>
+</div>
 

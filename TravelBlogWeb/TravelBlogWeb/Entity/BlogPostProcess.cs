@@ -39,7 +39,14 @@ namespace TravelBlogWeb.Entity
 
         public bool Delete(int id)
         {
-            throw new NotImplementedException();
+            BlogPost blogPost = db.BlogPosts.FirstOrDefault(u => u.Id == id);
+
+            if (blogPost != null)
+            {
+                blogPost.IsDeleted = true;
+                return true;
+            }
+            return false;
         }
 
         public BlogPost Get(int id)
@@ -50,7 +57,8 @@ namespace TravelBlogWeb.Entity
 
         public List<BlogPost> GetAll()
         {
-            throw new NotImplementedException();
+            return db.BlogPosts.Where(u => !u.IsDeleted).ToList();
+
         }
 
         public bool Update(BlogPost entity, int id)

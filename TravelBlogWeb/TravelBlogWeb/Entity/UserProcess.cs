@@ -33,22 +33,41 @@ namespace TravelBlogWeb.Entity
 
         public bool Delete(int id)
         {
-            throw new NotImplementedException();
+            User userToDelete = db.Users.FirstOrDefault(u => u.Id == id);
+
+            if (userToDelete != null)
+            {
+                userToDelete.IsDeleted = true;
+                return true;
+            }
+            return false;
         }
 
         public User Get(int id)
         {
-            throw new NotImplementedException();
+            return db.Users.FirstOrDefault(u => u.Id == id && !u.IsDeleted);
         }
-
         public List<User> GetAll()
         {
-            throw new NotImplementedException();
+            return db.Users.Where(u => !u.IsDeleted).ToList();
         }
 
         public bool Update(User entity, int id)
         {
-            throw new NotImplementedException();
+            User userToUpdate = db.Users.FirstOrDefault(u => u.Id == id && !u.IsDeleted);
+
+            if (userToUpdate != null)
+            {
+                userToUpdate.Name = entity.Name;
+                userToUpdate.Email = entity.Email;
+                userToUpdate.Password = entity.Password;
+                userToUpdate.Image = entity.Image;
+                userToUpdate.IsAdmin = entity.IsAdmin;
+                userToUpdate.IsDeleted = entity.IsDeleted;
+                return true;
+            }
+
+            return false;
         }
     }
 }

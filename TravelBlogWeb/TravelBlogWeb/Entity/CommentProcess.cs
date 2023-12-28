@@ -38,19 +38,40 @@ namespace TravelBlogWeb.Entity
 
             return result;
         }
-
         public bool Delete(int id)
         {
-            throw new NotImplementedException();
+            BlogComment commentToDelete = db.BlogComments.FirstOrDefault(u => u.Id == id);
+
+            if (commentToDelete != null)
+            {
+                commentToDelete.IsActive = true;
+                return true;
+            }
+            return false;
         }
-        public List<BlogComment> GetAll()
+        public List<BlogComment> GetApproved()
         {
-            throw new NotImplementedException();
+            return db.BlogComments.Where(u => u.IsActive).ToList();
+
+        }
+        public List<BlogComment> GetPendings()
+        {
+            return db.BlogComments.Where(u => !u.IsActive).ToList();
+
         }
 
         public bool Update(BlogComment entity, int id)
         {
-            throw new NotImplementedException();
+            BlogComment commentToUpdate = db.BlogComments.FirstOrDefault(u => u.Id == id);
+
+            if (commentToUpdate != null)
+            {
+                commentToUpdate.Comment = entity.Comment;
+                commentToUpdate.IsActive = entity.IsActive;
+                return true;
+            }
+
+            return false;
         }
         public List<BlogComment> GetBlogComments(int blogPostId)
         {
@@ -62,7 +83,13 @@ namespace TravelBlogWeb.Entity
 
         BlogComment ICrud<BlogComment>.Get(int id)
         {
-            throw new NotImplementedException();
+            return db.BlogComments.FirstOrDefault(u => u.Id == id);
+
+        }
+
+        public List<BlogComment> GetAll()
+        {
+            return db.BlogComments.ToList();
         }
     }
 }

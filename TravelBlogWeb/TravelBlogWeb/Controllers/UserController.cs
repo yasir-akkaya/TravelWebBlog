@@ -78,7 +78,6 @@ namespace TravelBlogWeb.Controllers
         [HttpPost]
         public ActionResult SignUp(User model)
         {
-
             try
             {
                 string name = Request.Form["name"];
