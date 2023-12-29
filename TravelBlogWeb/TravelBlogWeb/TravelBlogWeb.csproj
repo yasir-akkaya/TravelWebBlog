@@ -612,6 +612,13 @@
     <Content Include="Views\Shared\_PanelLayout.cshtml" />
     <Content Include="Views\User\MyBlogs.cshtml" />
     <Content Include="Views\User\EditMyBlog.cshtml" />
+    <Content Include="Views\Panel\Likes.cshtml" />
+    <Content Include="Views\Panel\PendingComments.cshtml" />
+    <Content Include="Views\Panel\ApprovedComments.cshtml" />
+    <Content Include="Views\Panel\BlogsPanel.cshtml" />
+    <Content Include="Views\Panel\UsersPanel.cshtml" />
+    <Content Include="Views\User\MyProfile.cshtml" />
+    <Content Include="Views\User\EditMyProfile.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

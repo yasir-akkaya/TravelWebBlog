@@ -1,0 +1,32 @@
+﻿@model TravelBlogWeb.Models.User
+@{
+    ViewBag.Title = "MyProfile";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<main id="main">
+    <section id="hero-slider" class="hero-slider">
+        <div class="container-md" data-aos="fade-in">
+            <div class="row">
+                <div class="col-7">
+                    <form action="@Url.Action("EditProfile")" method="post">
+                        <div class="mb-3">
+                            <input name="userId" class="col-2 d-none" value="@Model.Id">
+                            <label for="userEmail" class="form-label"><h3>Email</h3></label>
+                            <input value="@Model.Email " type="text" class="form-control" id="userEmail" name="userEmail" aria-describedby="blogHeader" />
+                            <label for="userName" class="form-label"><h3>Name</h3></label>
+                            <input value="@Model.Name " type="text" class="form-control" id="userName" name="userName" aria-describedby="blogHeader" />
+                            <label for="userName" class="form-label"><h3>Password</h3></label>
+                            <input value="@Model.Password " type="text" class="form-control" id="userPassword" name="userPassword" aria-describedby="blogHeader" />
+                        </div>
+                        <div>
+                            <button class="btn btn-outline-success" type="submit">Update</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</main>
+

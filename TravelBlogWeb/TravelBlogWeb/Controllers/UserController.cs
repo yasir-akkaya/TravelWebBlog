@@ -66,9 +66,6 @@ namespace TravelBlogWeb.Controllers
             return RedirectToAction("Login");
         }
 
-
-
-
         public ActionResult SignUp()
         {
             return View();
@@ -125,15 +122,11 @@ namespace TravelBlogWeb.Controllers
             ViewBag.cities = cities;
 
             var editedBlog = blogPostProcess.Get(blogId);
-            
-
-
             return View(editedBlog);
         }
         [HttpPost]
         public ActionResult EditMyBlog(BlogPost model)
         {
-
             try
             {
                 string title = Request.Form["blogTitle"];
@@ -145,6 +138,7 @@ namespace TravelBlogWeb.Controllers
                 {
                     Title = title,
                     Content = content,
+                    
                     UserId = Convert.ToInt32(HttpContext.Session["userId"])
                 };
 
@@ -168,10 +162,87 @@ namespace TravelBlogWeb.Controllers
 
                 return View("Error");
             }
+        }
 
 
+        
+        public ActionResult MyProfile(int id)
+        {
+            var user = userProcess.Get(id);
+            return View(user);
+
+        }
+
+        [HttpPost]
+        public ActionResult EditProfile()
+        {
+            try
+            {
+                string name = Request.Form["userName"];
+                string email = Request.Form["userEmail"];
+                string password = Request.Form["userPassword"];
+
+                
+                int userId = int.Parse(Request.Form["userId"]);
+
+                User editedUser = new User
+                { 
+                    Id=userId,
+                    Name = name,
+                    Email = email,
+                    Password = password
+                };
+                userProcess.Update(editedUser, userId);
+
+                ViewData["successMessage"] = "user updated successfully!";
+
+                return RedirectToAction("Index", "Home");
+            }
+
+            catch (Exception ex)
+            {
+                return View("Error");
+            }
+        }
 
 
+        public ActionResult EditMyProfile(string eMail)
+        {
+            var user = userProcess.Get(eMail);
+            return View(user);
+        }
+
+        [HttpPost]
+        public ActionResult EditMyProfile()
+        {
+            try
+            {
+                string name = Request.Form["userName"];
+                string email = Request.Form["userEmail"];
+                string password = Request.Form["userPassword"];
+
+
+                int userId = Convert.ToInt32(HttpContext.Session["userId"]);
+
+                User editedUser = new User
+                {
+                    Id = userId,
+                    Name = name,
+                    Email = email,
+                    Password = password
+                };
+                userProcess.Update(editedUser, userId);
+
+                ViewData["successMessage"] = "user updated successfully!";
+
+                return RedirectToAction("Index", "Home");
+            }
+
+            catch (Exception ex)
+            {
+
+                return View("Error");
+            }
         }
 
     }

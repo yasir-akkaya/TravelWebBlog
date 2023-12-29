@@ -1,0 +1,56 @@
+﻿
+@model List<TravelBlogWeb.Models.BlogComment>
+@{
+    ViewBag.Title = "PendingComments";
+    Layout = "~/Views/Shared/_PanelLayout.cshtml";
+}
+<div class="content-page">
+    <div class="content">
+
+        <div class="container mt-4">
+            <h2>Pending Comments</h2>
+            <table class="table table-bordered light-theme text-black">
+                <thead class="text-center">
+                    <tr>
+                        <th>Blog Id</th>
+                        <th>Blog Name</th>
+                        <th>User Id</th>
+                        <th>User Name</th>
+                        <th>Comment</th>
+                        <th>Settings</th>
+
+                    </tr>
+                </thead>
+                <tbody class="text-center">
+                    @foreach (var item in Model)
+                    {
+
+                        <tr>
+                            <td>@item.BlogPost.Id</td>
+                            <td>@item.BlogPost.Title</td>
+                            <td>@item.User.Name</td>
+                            <td>@item.User.Id</td>
+                            <td>@item.Comment</td>
+                            <td>
+                                <form action="@Url.Action("ApproveComment")" method="post">
+                                    <input class="d-none" type="text" id="commentId" name="commentId" value="@item.Id" />
+                                <button type="submit" class="btn btn-success" >Approve</button>
+                                </form>
+                                <form class="mt-2" action="@Url.Action("HardDeleteComment")" method="post">
+                                    <input class="d-none" type="text" name="commentId" value="@item.Id" />
+                                    <button type="submit" class="btn btn-danger">Delete</button>
+                                </form>
+                            </td>
+
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+
+
+
+
+    </div>
+
+</div>

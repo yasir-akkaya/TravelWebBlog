@@ -19,12 +19,7 @@ namespace TravelBlogWeb.Controllers
             ViewBag.popularsMain = blogPostProcess.GetTenPopulars().Take(7).ToList();
             ViewBag.popularsAside = blogPostProcess.GetTenPopulars().Take(5).ToList();
             ViewBag.latests = blogPostProcess.GetTenLatests().ToList();
-            ViewBag.counter = 1;
-
-            if (User.Identity.IsAuthenticated)
-            {
-                ViewBag.state = true;
-            }
+            ViewBag.counter = 1;    
 
 
             return View();

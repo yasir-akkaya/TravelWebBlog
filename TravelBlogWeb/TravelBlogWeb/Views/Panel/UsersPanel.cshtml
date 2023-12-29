@@ -1,0 +1,86 @@
+﻿@model List<TravelBlogWeb.Models.User>
+
+@{
+    ViewBag.Title = "UsersPanel";
+    Layout = "~/Views/Shared/_PanelLayout.cshtml";
+}
+
+<div class="content-page">
+    <div class="content">
+
+        <div class="container mt-4">
+            <h2>Users</h2>
+            <table class="table table-bordered light-theme text-black">
+                <thead class="text-center">
+                    <tr>
+                        <th>User Id</th>
+                        <th>Name</th>
+                        <th>Password</th>
+                        <th>Blog Creation Date</th>
+                        <th>Image</th>
+                        <th>Role</th>
+                        <th>Activity</th>
+                        <th>Settings</th>
+                    </tr>
+                </thead>
+                <tbody class="text-center">
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.Id</td>
+                            <td>@item.Name</td>
+                            <td>@item.Password</td>
+                            <td>@item.CreationDate</td>
+                            <td>@item.Image</td>
+                            @{if (@item.IsAdmin)
+                                {
+                                    <td>
+                                        <a class="btn-success text-white btn"> Admin </a>
+
+                                    </td>
+                                }
+                                else
+                                {
+                                    <td>
+                                        <a style="background-color: black;" class="btn text-white">User </a>
+                                    </td>
+
+                                }
+                            }
+                            @{if (@item.IsDeleted)
+                                {
+                                    <td class="bg-danger text-white">
+                                        Passive
+                                    </td>
+                                }
+                                else
+                                {
+
+                                    <td class="bg-success text-white">
+                                        Active
+                                    </td>
+                                }
+
+                            }
+
+                            <td class="mx-1">
+                                <a class="btn btn-warning" href="@Url.Action("MyProfile", "User", new { id = @item.Id })">Edit</a>
+                                <form class="mt-2" action="@Url.Action("DeleteUser")" method="post">
+                                    <input class="d-none" type="text" name="userIddd" value="@item.Id" />
+                                    <button type="submit" class="btn btn-danger">Delete</button>
+                                </form>
+                            </td>
+
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+
+
+
+
+    </div>
+</div>
+
+

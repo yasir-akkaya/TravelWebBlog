@@ -57,9 +57,6 @@ namespace TravelBlogWeb.Controllers
 
             return View(blog);
         }
-
-
-
         [HttpPost]
         public ActionResult AddComment()
         {
@@ -103,7 +100,7 @@ namespace TravelBlogWeb.Controllers
             var dislikedLike = db.BlogLikes.FirstOrDefault(x => x.BlogPostId == currentId && x.UserId ==userId);
 
             int dislikedId = Convert.ToInt32(dislikedLike.Id);
-            string result = blogLikeProcess.Delete(dislikedId);
+            string result = blogLikeProcess.Dislike(dislikedId);
 
             ViewBag.ResultMessage = result;
 

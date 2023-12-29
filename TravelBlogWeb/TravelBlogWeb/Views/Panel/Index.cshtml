@@ -6,7 +6,6 @@
 
 <div class="content-page">
     <div class="content">
-
         <!-- Start Content-->
         <div class="container-fluid">
 
@@ -14,7 +13,7 @@
 
                 <h2>Index - Hoşgeldin @HttpContext.Current.User.Identity.Name</h2>
                 
-                <div style="cursor:pointer;" class="col-2">
+                <div style="cursor:pointer;" class="col-2" onclick="window.location.href='/Panel/UsersPanel'">
                     <div class="card div-hover">
                         <div class="card-header">
                             <h3>Users</h3>
@@ -25,18 +24,18 @@
                         </div>
                     </div>
                 </div>
-                <div style="cursor:pointer;" class="col-2">
+                <div style="cursor:pointer;" class="col-2" onclick="window.location.href='/Panel/BlogsPanel'">
                     <div class="card div-hover" >
                         <div class="card-header">
                             <h3>Blogs</h3>
                         </div>
                         <div class="card-body text-center">
-                            <i class="fa-solid fa-file-lines text-primary" style="font-size:50px"></i> &nbsp;
+                            <i class="fa-solid fa-file-lines text-primary" style="font-size:50px" ></i> &nbsp;
                             <b class="text-primary" style="font-size:56px">@Model.BlogCount</b>
                         </div>
                     </div>
                 </div>
-                <div style="cursor:pointer;" class="col-3">
+                <div style="cursor:pointer;" class="col-3" onclick="window.location.href='/Panel/ApprovedComments'">
                     <div class="card div-hover">
                         <div class="card-header">
                             <h3>Approved Comments</h3>
@@ -47,7 +46,7 @@
                         </div>
                     </div>
                 </div>
-                <div style="cursor:pointer;" class="col-3">
+                <div style="cursor:pointer;" class="col-3" onclick="window.location.href='/Panel/PendingComments'">
                     <div class="card div-hover">
                         <div class="card-header">
                             <h3>Pending Comments</h3>
@@ -58,7 +57,7 @@
                         </div>
                     </div>
                 </div>
-                <div style="cursor:pointer;" class="col-2" onclick="@Url.Action("Likes")">
+                <div style="cursor:pointer;" class="col-2" onclick="window.location.href='/Panel/Likes'">
                     <div class="card div-hover">
                         <div class="card-header">
                             <h3>Total Likes</h3>
@@ -169,7 +168,6 @@
                                         </a>
                                     </td>
                                 </tr>
-
                             }
                         </tbody>
                     </table>
@@ -190,7 +188,6 @@
                 </div>
             </div>
         }*@
-
 
                 @*<div class="row">
             <div class="col-3">

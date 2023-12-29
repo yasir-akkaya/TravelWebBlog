@@ -44,9 +44,11 @@ namespace TravelBlogWeb.Entity
 
             if (commentToDelete != null)
             {
-                commentToDelete.IsActive = true;
+                commentToDelete.IsActive = false;
+                db.SaveChanges(); 
                 return true;
             }
+
             return false;
         }
         public List<BlogComment> GetApproved()
@@ -66,16 +68,15 @@ namespace TravelBlogWeb.Entity
 
             if (commentToUpdate != null)
             {
-                commentToUpdate.Comment = entity.Comment;
                 commentToUpdate.IsActive = entity.IsActive;
+                db.SaveChanges();
                 return true;
             }
-
             return false;
         }
         public List<BlogComment> GetBlogComments(int blogPostId)
         {
-            List<BlogComment> comments = db.BlogComments.Where(comment => comment.BlogPostId == blogPostId && comment.IsActive==true)
+            List<BlogComment> comments = db.BlogComments.Where(comment => comment.BlogPostId == blogPostId && comment.IsActive == true)
                 .OrderBy(comment => comment.CreationDate)
                 .ToList();
             return comments;

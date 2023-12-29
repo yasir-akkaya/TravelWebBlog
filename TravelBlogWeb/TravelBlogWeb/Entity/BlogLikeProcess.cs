@@ -39,7 +39,7 @@ namespace TravelBlogWeb.Entity.Interfaces
             return result;
         }
 
-        public string Delete(int id)
+        public string Dislike(int id)
         {
             string result = "";
             
@@ -65,8 +65,35 @@ namespace TravelBlogWeb.Entity.Interfaces
 
             return result;
         }
+        public string Delete(int id)
+        {
+            string result = "";
 
-        
+            try
+            {
+                var likes = db.BlogLikes.Where(x => x.BlogPostId == id).ToList();
+
+                if (likes != null)
+                {
+                    db.BlogLikes.RemoveRange(likes);
+                    db.SaveChanges();
+                    result = likes+ " Like removed successfully";
+                }
+                else
+                {
+                    result = likes+ " Like not found!";
+                }
+            }
+            catch (Exception ex)
+            {
+                result += ex.Message;
+            }
+
+            return result;
+        }
+
+
+
         public BlogLike Get(int id)
         {
             throw new NotImplementedException();

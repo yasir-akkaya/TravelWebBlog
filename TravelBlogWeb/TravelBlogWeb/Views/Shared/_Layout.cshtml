@@ -2,6 +2,7 @@
     var userEmail = HttpContext.Current.Session["userEmail"] as string;
     var userName = HttpContext.Current.Session["name"] as string;
     var userImg = HttpContext.Current.Session["img"] as string;
+    var userId = HttpContext.Current.Session["userId"] as string;
 }
 <!DOCTYPE html>
 <html>
@@ -10,7 +11,7 @@
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-    <title>ZenBlog Bootstrap Template - Index</title>
+    <title>Anatolian Vibes</title>
     <meta content="" name="description">
     <meta content="" name="keywords">
 
@@ -50,7 +51,7 @@
             <a href="/" class="logo d-flex align-items-center">
                 <!-- Uncomment the line below if you also wish to use an image logo -->
                 <!-- <img src="~/Zenblog/assets/img/logo.png" alt=""> -->
-                <h1>Yasir</h1>
+                <h1>Anatolian Vibes</h1>
             </a>
 
             <nav id="navbar" class="navbar">
@@ -75,6 +76,11 @@
                             </li>
                             <li>
                                 @Html.ActionLink("My Blogs", "MyBLogs", "User")
+                            </li>
+                            <li>
+
+                                @Html.ActionLink("Profile", "EditMyProfile", "User", new { eMail = userEmail }, null)
+
                             </li>
                             <li>
                                 @Html.ActionLink("Logout", "Logout", "User")
@@ -119,7 +125,7 @@
                     {
                         <div class="container mt-3 text-center ">
                             <div class="rounded-circle overflow-hidden mx-auto" style="width: 50px; height: 50px;">
-                                <img src="https://via.placeholder.com/200" alt="Image" class="w-100 h-100 object-fit-cover">
+                                <img src="@userImg" alt="Image" class="w-100 h-100 object-fit-cover">
                             </div>
                             <p>@userName</p>
                         </div>
@@ -154,7 +160,7 @@
 
                 <div class="row g-5">
                     <div class="col-lg-10">
-                        <h3 class="footer-heading">About ZenBlog</h3>
+                        <h3 class="footer-heading">About Anatolian Vibes</h3>
                         <p>Discover the beauty and diversity of Turkey's 81 provinces through our blog. As passionate travelers and storytellers, we aim to bring you captivating narratives and stunning visuals that showcase the rich history, vibrant culture, and breathtaking landscapes of each region.</p>
                         <p><a href="Home/About" class="footer-link-more">Learn More</a></p>
                     </div>
@@ -175,7 +181,7 @@
 
                         </ul>
                     </div>
-                    
+
 
                 </div>
             </div>

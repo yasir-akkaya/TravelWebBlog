@@ -1,0 +1,70 @@
+﻿
+@model List<TravelBlogWeb.Models.BlogPost>
+
+@{
+    ViewBag.Title = "BlogsPanel";
+    Layout = "~/Views/Shared/_PanelLayout.cshtml";
+}
+<div class="content-page">
+    <div class="content">
+
+        <div class="container mt-4">
+            <h2>Blogs</h2>
+            <table class="table table-bordered light-theme text-black">
+                <thead class="text-center">
+                    <tr>
+                        <th>Blog Id</th>
+                        <th>Blog Title</th>
+                        <th>Blog Content</th>
+                        <th>Author Name</th>
+                        <th>Blog Creation Date</th>
+                        <th>isActive</th>
+                        <th>Settings</th>
+                    </tr>
+                </thead>
+                <tbody class="text-center">
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.Id</td>
+                            <td>@item.Title</td>
+                            <td>@item.Content</td>
+                            <td>@item.User.Name</td>
+                            <td>@item.CreationDate</td>
+                            @{if (@item.IsDeleted)
+                                {
+                                    <td class="bg-danger text-white ">
+                                        Passive
+                                    </td>
+                                }
+                                else
+                                {
+
+                                    <td class="bg-success text-white">
+                                        Active
+                                    </td>
+                                }
+
+                            }
+
+                            <td>
+                                <a class="btn btn-info" href="@Url.Action("ShowBlog", "SingleBlog", new { id = @item.Id })">View</a>
+                                <a class="btn btn-warning mt-1" href="@Url.Action("EditMyBlog", "User", new { blogId = @item.Id })">Edit</a>
+                                <form class="mt-2" action="@Url.Action("DeleteBlog")" method="post">
+                                    <input class="d-none" type="text" name="blogId" value="@item.Id" />
+                                    <button type="submit" class="btn btn-danger">Delete</button>
+                                </form>
+                            </td>
+
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+
+
+
+
+    </div>
+
+</div>

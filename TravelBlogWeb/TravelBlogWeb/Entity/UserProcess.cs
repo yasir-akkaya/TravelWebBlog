@@ -38,23 +38,31 @@ namespace TravelBlogWeb.Entity
             if (userToDelete != null)
             {
                 userToDelete.IsDeleted = true;
+                db.SaveChanges();
                 return true;
             }
             return false;
         }
 
+        public User Get(string mail)
+        {
+              User user= db.Users.FirstOrDefault(u => u.Email == mail);
+            return user;
+        }
+
         public User Get(int id)
         {
-            return db.Users.FirstOrDefault(u => u.Id == id && !u.IsDeleted);
+            throw new NotImplementedException();
         }
+
         public List<User> GetAll()
         {
-            return db.Users.Where(u => !u.IsDeleted).ToList();
+            return db.Users.ToList();
         }
 
         public bool Update(User entity, int id)
         {
-            User userToUpdate = db.Users.FirstOrDefault(u => u.Id == id && !u.IsDeleted);
+            User userToUpdate = db.Users.FirstOrDefault(u => u.Id == id);
 
             if (userToUpdate != null)
             {
@@ -62,8 +70,8 @@ namespace TravelBlogWeb.Entity
                 userToUpdate.Email = entity.Email;
                 userToUpdate.Password = entity.Password;
                 userToUpdate.Image = entity.Image;
-                userToUpdate.IsAdmin = entity.IsAdmin;
                 userToUpdate.IsDeleted = entity.IsDeleted;
+                db.SaveChanges();
                 return true;
             }
 

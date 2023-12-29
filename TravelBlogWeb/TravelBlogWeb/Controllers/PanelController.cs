@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.UI.WebControls;
 using TravelBlogWeb.Entity;
 using TravelBlogWeb.Entity.Data;
 using TravelBlogWeb.Entity.Interfaces;
@@ -41,10 +42,187 @@ namespace TravelBlogWeb.Controllers
             }
         }
 
-        //public ActionResult Likes()
-        //{
+        public ActionResult Likes()
+        {
+            var userProvider = new RoleSecurityProvider();
+            int userId = (int)(HttpContext.Session["userId"]);
+            if (userProvider.IsUserAdmin(userId))
+            {
+                var allLikes = blogLikeProcess.GetAll();
 
-        //    return true;
-        //}
+                return View(allLikes);
+            }
+            else
+            {
+                return RedirectToAction("UnauthorizedAccess", "Error");
+            }
+        }
+
+        public ActionResult PendingComments()
+        {
+            var userProvider = new RoleSecurityProvider();
+            int userId = (int)(HttpContext.Session["userId"]);
+            if (userProvider.IsUserAdmin(userId))
+            {
+                var pendingComments = commentProcess.GetPendings();
+
+                return View(pendingComments);
+            }
+            else
+            {
+                return RedirectToAction("UnauthorizedAccess", "Error");
+            }
+        }
+
+        [HttpPost]
+        public ActionResult ApproveComment()
+        {
+            var userProvider = new RoleSecurityProvider();
+            int userId = (int)(HttpContext.Session["userId"]);
+            int commentId = Convert.ToInt32(Request.Form["commentId"]);
+
+            if (userProvider.IsUserAdmin(userId))
+            {
+                BlogComment approvedComment = new BlogComment
+                {
+                    IsActive = true
+                };
+
+                commentProcess.Update(approvedComment, commentId);
+                return RedirectToAction("pendingComments");
+            }
+            else
+            {
+                return RedirectToAction("UnauthorizedAccess", "Error");
+            }
+        }
+
+        public ActionResult ApprovedComments()
+        {
+            var userProvider = new RoleSecurityProvider();
+            int userId = (int)(HttpContext.Session["userId"]);
+            if (userProvider.IsUserAdmin(userId))
+            {
+                var pendingComments = commentProcess.GetApproved();
+
+                return View(pendingComments);
+            }
+            else
+            {
+                return RedirectToAction("UnauthorizedAccess", "Error");
+            }
+        }
+
+
+
+        [HttpPost]
+        public ActionResult DeleteComment()
+        {
+            var userProvider = new RoleSecurityProvider();
+            int userId = (int)(HttpContext.Session["userId"]);
+            int commentId = Convert.ToInt32(Request.Form["commentId"]);
+
+            if (userProvider.IsUserAdmin(userId))
+            {
+                commentProcess.Delete(commentId);
+                return RedirectToAction("ApprovedComments");
+
+            }
+            else
+            {
+                return RedirectToAction("UnauthorizedAccess", "Error");
+            }
+        }
+        [HttpPost]
+        public ActionResult HardDeleteComment()
+        {
+            var userProvider = new RoleSecurityProvider();
+            int userId = (int)(HttpContext.Session["userId"]);
+            int commentId = Convert.ToInt32(Request.Form["commentId"]);
+
+            if (userProvider.IsUserAdmin(userId))
+            {
+                BlogComment blogCommentToDelete = db.BlogComments.Find(commentId);
+                db.BlogComments.Remove(blogCommentToDelete);
+                db.SaveChanges();
+
+                return RedirectToAction("pendingComments");
+
+            }
+            else
+            {
+                return RedirectToAction("UnauthorizedAccess", "Error");
+            }
+        }
+        public ActionResult BlogsPanel()
+        {
+            var userProvider = new RoleSecurityProvider();
+            int userId = (int)(HttpContext.Session["userId"]);
+
+            if (userProvider.IsUserAdmin(userId))
+            {
+                List<BlogPost> posts = new List<BlogPost>();
+                posts = blogPostProcess.GetAll();
+                return View(posts);
+            }
+            else
+            {
+                return RedirectToAction("UnauthorizedAccess", "Error");
+            }
+        }
+        [HttpPost]
+        public ActionResult DeleteBlog()
+        {
+            var userProvider = new RoleSecurityProvider();
+            int userId = (int)(HttpContext.Session["userId"]);
+            int blogId = Convert.ToInt32(Request.Form["blogId"]);
+
+            if (userProvider.IsUserAdmin(userId))
+            {
+                blogLikeProcess.Delete(blogId);
+                blogPostProcess.Delete(blogId);
+                return RedirectToAction("BlogsPanel");
+            }
+            else
+            {
+                return RedirectToAction("UnauthorizedAccess", "Error");
+            }
+        }
+
+        public ActionResult UsersPanel()
+        {
+            var userProvider = new RoleSecurityProvider();
+
+            int userId = (int)(HttpContext.Session["userId"]);
+
+            if (userProvider.IsUserAdmin(userId))
+            {
+                List<User> users = new List<User>();
+                users = userProcess.GetAll();
+                return View(users);
+            }
+            else
+            {
+                return RedirectToAction("UnauthorizedAccess", "Error");
+            }
+        }
+
+        [HttpPost]
+        public ActionResult DeleteUser()
+        {
+            var userProvider = new RoleSecurityProvider();
+            int userId = (int)(HttpContext.Session["userId"]);
+            int userIdToDelete = Convert.ToInt32(Request.Form["userIddd"]);
+            if (userProvider.IsUserAdmin(userId))
+            {
+                userProcess.Delete(userIdToDelete); 
+                return RedirectToAction("UsersPanel");
+            }
+            else
+            {
+                return RedirectToAction("UnauthorizedAccess", "Error");
+            }
+        }
+
     }
 }

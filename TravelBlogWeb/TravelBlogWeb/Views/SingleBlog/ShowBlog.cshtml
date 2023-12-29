@@ -13,13 +13,8 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-9 post-content" data-aos="fade-up">
-                    <!-- ======= Single Post Content ======= -->
                     <div class="single-post">
                         <div class="post-meta d-inline-block">
-
-
-
-
                             &nbsp;&nbsp;&nbsp;
                             <span class="date float-start">@Model.User.Name</span>
                             <span class="mx-1">&bullet;</span>
@@ -50,24 +45,29 @@
 
                                     }
                                 }
+                                else
+                                {
+                                    <form style="width:20px;" method="post">
+                                        <input class="d-none" type="number" name="likeblogId" />
+                                        <button disabled style="border:none;" class="bg-white" type="submit">
+                                            <i class="fa-regular fa-heart fa-2xl" style="color: #000000;"></i>
+                                        </button>
+                                    </form>
+                                }
 
 
 
-                                <form style="width:20px;" method="post">
-                                    <input class="d-none" type="number" name="likeblogId" />
-                                    <button disabled style="border:none;" class="bg-white" type="submit">
-                                        <i class="fa-regular fa-heart fa-2xl" style="color: #000000;"></i>
-                                    </button>
-                                </form>
                             }
                         </div>
                         <h1 class="mb-5">@Model.Title</h1>
+                        <div>
 
+                            <img style="height:400px; width:1200px;" src=@Model.Image alt="" class="img-fluid">
+
+                        </div>
                         <p style="white-space:pre-line;">
                             @Model.Content
                         </p>
-
-
                     </div><!-- End Single Post Content -->
                     <!-- ======= Comments ======= -->
 
@@ -78,7 +78,7 @@
                             <div class="comment d-flex mb-4">
                                 <div class="flex-shrink-0">
                                     <div class="avatar avatar-sm rounded-circle">
-                                        <img class="avatar-img img-fluid" src="~/ZenBlog/assets/img/person-5.jpg" alt="">
+                                        <img class="avatar-img img-fluid" src="@item.User.Image" alt="">
                                     </div>
                                 </div>
                                 <div class="flex-grow-1 ms-2 ms-sm-3">

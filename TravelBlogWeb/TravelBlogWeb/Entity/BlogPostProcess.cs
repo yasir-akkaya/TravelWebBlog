@@ -44,6 +44,7 @@ namespace TravelBlogWeb.Entity
             if (blogPost != null)
             {
                 blogPost.IsDeleted = true;
+                db.SaveChanges();
                 return true;
             }
             return false;
@@ -54,10 +55,9 @@ namespace TravelBlogWeb.Entity
             var blog = db.BlogPosts.FirstOrDefault(x => x.Id == id);
             return blog;
         }
-
         public List<BlogPost> GetAll()
         {
-            return db.BlogPosts.Where(u => !u.IsDeleted).ToList();
+            return db.BlogPosts.ToList();
 
         }
 
@@ -69,6 +69,7 @@ namespace TravelBlogWeb.Entity
                 editedBlog.Title = entity.Title;
                 editedBlog.Content = entity.Content;
                 editedBlog.Image = entity.Image;
+                editedBlog.IsDeleted = false;
                 db.SaveChanges();
                 return true;
             }
@@ -78,9 +79,7 @@ namespace TravelBlogWeb.Entity
 
         public List<BlogPost> GetCityBlogPosts(List<int> blogs)
         {
-
             List<BlogPost> singleCity = db.BlogPosts.Where(blog => blogs.Contains(blog.Id)).ToList();
-
             return singleCity;
         }
 
