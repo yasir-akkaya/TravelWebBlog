@@ -4,13 +4,32 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<main style="margin-top:8% ; margin-bottom:8%;">
-    <ul>
-        @foreach (var city in Model)
-        {
-            <li>
-                @Html.ActionLink(city.CityName, "CityBlogs", new { cityId = city.Id })
-            </li>
-        }
-    </ul>
+<main style="margin-top: 8%; margin-bottom: 8%;">
+    <div class="container">
+        <div class="row">
+            @foreach (var city in Model)
+            {
+                <div class="col-md-3 mb-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">@city.CityName</h5>
+                        </div>
+                        <div class="card-footer">
+                            @Html.ActionLink("See Blogs", "CityBlogs", new { cityId = city.Id }, new { @class = "btn btn-primary" })
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
 </main>
+
+<style>
+    .card {
+        transition: transform 0.3s;
+    }
+
+        .card:hover {
+            transform: scale(1.05);
+        }
+</style>

@@ -22,7 +22,7 @@
                 {
 
                     <div class="post-entry-1 border-bottom">
-                        <div class="post-meta"><span class="date">Sport</span> <span class="mx-1">&bullet;</span> <span>@item.CreationDate</span></div>
+                        <div class="post-meta"><span>@item.CreationDate</span></div>
                         <h2 class="mb-2"><a href="@Url.Action("ShowBlog", "SingleBlog", new { id = item.Id })">@item.Title</a></h2>
                         <span class="author mb-3 d-block">@item.User.Name</span>
                     </div>
@@ -42,7 +42,7 @@
             {
 
                 <div class="post-entry-1 border-bottom">
-                    <div class="post-meta"><span class="date">Sport</span> <span class="mx-1">&bullet;</span> <span>@item.CreationDate</span></div>
+                    <div class="post-meta"> <span>@item.CreationDate</span></div>
                     <h2 class="mb-2"><a href="@Url.Action("ShowBlog", "SingleBlog", new { id = item.Id })">@item.Title</a></h2>
                     <span class="author mb-3 d-block">@item.User.Name</span>
                 </div>
