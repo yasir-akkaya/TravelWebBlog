@@ -24,14 +24,17 @@
                                     <option value="@item.Id">@item.CityName</option>
                                 }
                             </select>
-                        <label class="mb-1"><h3>Your Content:</h3></label>
+                            <label class="mb-1"><h3>Your Content:</h3></label>
                         </div>
-
+                        <div class="mb-3">
+                            <label for="blogImage" class="form-label"><h3>Blog Image(URL)</h3></label>
+                            <input type="text" class="form-control" id="blogImage" name="blogImage" aria-describedby="blogImage">
+                        </div>
                         <textarea style="width:750px;" class="mb-3" id="editor" name="editor" cols="30" rows="50"></textarea>
 
                         <div>
 
-                        <button class="btn btn-outline-success" type="submit">Submit</button>
+                            <button class="btn btn-outline-success" type="submit">Submit</button>
                         </div>
                     </form>
                 </div>

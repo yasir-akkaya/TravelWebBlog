@@ -18,6 +18,7 @@
                         <th>Blog Content</th>
                         <th>Author Name</th>
                         <th>Blog Creation Date</th>
+                        <th>Blog Image</th>
                         <th>isActive</th>
                         <th>Settings</th>
                     </tr>
@@ -31,6 +32,9 @@
                             <td>@item.Content</td>
                             <td>@item.User.Name</td>
                             <td>@item.CreationDate</td>
+                            <td>
+                                <img height="70px;" width="70px;" src="@item.Image" alt="Alternate Text" />
+                            </td>
                             @{if (@item.IsDeleted)
                                 {
                                     <td class="bg-danger text-white ">

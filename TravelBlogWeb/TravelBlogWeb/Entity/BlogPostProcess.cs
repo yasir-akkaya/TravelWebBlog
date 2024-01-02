@@ -58,7 +58,6 @@ namespace TravelBlogWeb.Entity
         public List<BlogPost> GetAll()
         {
             return db.BlogPosts.ToList();
-
         }
 
         public bool Update(BlogPost entity, int id)

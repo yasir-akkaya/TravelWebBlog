@@ -52,8 +52,8 @@
                                         <button disabled style="border:none;" class="bg-white" type="submit">
                                             <i class="fa-regular fa-heart fa-2xl" style="color: #000000;"></i>
                                         </button>
-                                        <p>You have to sign up for like blogs!</p>
                                     </form>
+                                        <p>You have to sign up for like blogs!</p>
                                 }
 
 
@@ -120,9 +120,6 @@
                             <h5 class="comment-title">Leave a Comment</h5>
                             <div class="row">
                                 <form action="@Url.Action("AddComment")" method="post">
-
-
-
                                     <div class="col-lg-7 mb-3">
                                         <input class="d-none" type="text" name="blogId" value="@ViewBag.blogId" />
                                         <label for="comment-name">Name</label>

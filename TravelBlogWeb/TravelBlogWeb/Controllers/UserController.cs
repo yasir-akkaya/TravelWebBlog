@@ -131,6 +131,7 @@ namespace TravelBlogWeb.Controllers
             {
                 string title = Request.Form["blogTitle"];
                 string content = Request.Form["editor"];
+                string image = Request.Form["blogImage"];
                 int selectedCityId = int.Parse(Request.Form["citiesList"]);
                 int editedBlogId = int.Parse(Request.Form["blogId"]);
 
@@ -138,7 +139,7 @@ namespace TravelBlogWeb.Controllers
                 {
                     Title = title,
                     Content = content,
-                    
+                    Image=image,
                     UserId = Convert.ToInt32(HttpContext.Session["userId"])
                 };
 

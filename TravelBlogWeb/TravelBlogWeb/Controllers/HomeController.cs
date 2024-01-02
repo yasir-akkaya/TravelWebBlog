@@ -54,6 +54,8 @@ namespace TravelBlogWeb.Controllers
 
             string title = Request.Form["blogTitle"];
             string content = Request.Form["editor"];
+            string image = Request.Form["blogImage"];
+
             int selectedCityId = int.Parse(Request.Form["citiesList"]);
 
 
@@ -63,6 +65,7 @@ namespace TravelBlogWeb.Controllers
                 Title = title,
                 Content = content,
                 CreationDate = DateTime.Now,
+                Image= image,
 
             };
 
